@@ -1,4 +1,10 @@
-import { createCanvas } from 'canvas';
+import { createCanvas, registerFont } from 'canvas';
+import path from 'path';
+
+registerFont(path.join(process.cwd(), 'fonts', 'Inter-Bold.ttf'), {
+  family: 'Inter',
+  weight: 'bold',
+});
 
 export async function GET(request) {
   const { searchParams } = new URL(request.url);
@@ -14,7 +20,7 @@ export async function GET(request) {
   const totalDays = 365;
 
   const msPerDay = 1000 * 60 * 60 * 24;
-  let daysPassed = Math.floor((today - yearStart) / msPerDay) + 1;
+  let daysPassed = Math.floor((today - yearStart) / msPerDay);
   if (daysPassed < 1) daysPassed = 0;
   if (daysPassed > totalDays) daysPassed = totalDays;
 
@@ -60,7 +66,7 @@ export async function GET(request) {
 
   ctx.fillStyle = '#FFFFFF';
   ctx.textAlign = 'center';
-  ctx.font = 'bold 100px Arial';         
+  ctx.font = 'bold 100px Inter';         
 
   const text = `${daysLeft}d left ${percent}%`;  
   ctx.fillText(text, width / 2, offsetY + gridHeight + 140);  
