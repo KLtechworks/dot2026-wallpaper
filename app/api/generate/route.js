@@ -15,7 +15,8 @@ export async function GET(request) {
   if (!dotColor.startsWith('#')) dotColor = '#' + dotColor;
   if (!bgColor.startsWith('#')) bgColor = '#' + bgColor;
 
-  const today = new Date();
+  const timezone = searchParams.get('tz') || 'Asia/Hong_Kong';
+  const today = new Date(new Date().toLocaleString('en-US', { timeZone: timezone }));
   const yearStart = new Date(2026, 0, 1);
   const totalDays = 365;
 
@@ -76,6 +77,7 @@ export async function GET(request) {
     headers: {
       'Content-Type': 'image/png',
       'Content-Disposition': 'inline',
+      'Cache-Control': 'no-store, no-cache, must-revalidate',
     },
   });
 }

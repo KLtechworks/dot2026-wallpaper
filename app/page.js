@@ -5,10 +5,11 @@ import { HexColorPicker, HexColorInput } from 'react-colorful';
 
 
 export default function Home() {
-  const [dotColor, setDotColor] = useState('#FF8000');  
-  const [bgColor, setBgColor] = useState('#4A4A4A');    
+  const [dotColor, setDotColor] = useState('#FF8000');
+  const [bgColor, setBgColor] = useState('#4A4A4A');
 
-  const apiUrl = `/api/generate?dotColor=${dotColor.slice(1)}&bgColor=${bgColor.slice(1)}`;
+  const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  const apiUrl = `/api/generate?dotColor=${dotColor.slice(1)}&bgColor=${bgColor.slice(1)}&tz=${timezone}`;
 
   return (
     <div style={{ 
